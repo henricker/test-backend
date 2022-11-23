@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pokemon {
+  pokedexNumber          Int                     @id
+  typePokemon            TypePokemon             @relation(fields: [typePokemonId], references: [id])
+  typePokemonId          Int
+  weatherPokemon         WeatherPokemon[]
+  powerStatus            PowerStatus?
+  pokemonCharacteristics PokemonCharacteristics?
+  pokemonEvolutionInfo   PokemonEvolutionInfo?
+}
+
+model TypePokemon {
+  id      Int       @id @default(autoincrement())
+  name    String
+  pokemon Pokemon[]
+}
+
+model Weather {
+  id             Int              @id @default(autoincrement())
+  name           String
+  weatherPokemon WeatherPokemon[]
+}
+
+model WeatherPokemon {
+  id        Int     @id @default(autoincrement())
+  weather   Weather @relation(fields: [weatherId], references: [id])
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
+  weatherId Int
+  pokemonId Int
+}
+
+model PowerStatus {
+  id        Int     @id @default(autoincrement())
+  atk       Int
+  def       Int
+  sta       Int
+  statTotal Int
+  cp_100_40 Int
+  cp_100_39 Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
+  pokemonId Int     @unique
+}
+
+model PokemonCharacteristics {
+  id           Int     @id @default(autoincrement())
+  legendary    Boolean
+  aquireable   Int
+  spawns       Boolean
+  regional     Boolean
+  raidable     Int
+  hatchable    Int
+  shiny        Boolean
+  nest         Boolean
+  new          Boolean
+  NotGettable  Boolean
+  futureEvolve Boolean
+  crossGen     Boolean
+  generation   Int
+  pokemon      Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
+  pokemonId    Int     @unique
+}
+
+model PokemonEvolutionInfo {
+  id             Int     @id @default(autoincrement())
+  evolutionStage Int
+  envolved       Boolean
+  familyId       Int
+  pokemon        Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
+  pokemonId      Int     @unique
+}

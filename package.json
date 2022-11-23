@@ -1,0 +1,40 @@
+{
+  "name": "@henricker/test-backend",
+  "version": "1.0.0",
+  "description": "Olá Dev! Tudo bem?",
+  "main": "jest-integration.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start:prod": "node ./build/app/server.js",
+    "start:dev": "npx ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app/server.ts",
+    "test": "yarn jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:unit": "yarn test -- --watch -c jest-unit.config.js",
+    "test:integration": "yarn test -- --watch -c jest-integration.config.js",
+    "test:ci": "yarn test -- --coverage",
+    "migrate:create": "npx prisma migrate dev --name",
+    "migrate:run": "npx prisma migrate deploy",
+    "seed": "npx ts-node ./prisma/seeds/seed.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henricker/test-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/henricker/test-backend/issues"
+  },
+  "homepage": "https://github.com/henricker/test-backend#readme",
+  "devDependencies": {
+    "prisma": "^4.6.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.6.1"
+  }
+}
