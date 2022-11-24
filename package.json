@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:prod": "node ./build/app/server.js",
-    "start:dev": "npx ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app/server.ts",
+    "start:prod": "node ./build/app/main/server.js",
+    "start:dev": "npx ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app/main/server.ts",
     "test": "yarn jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit.config.js",
     "test:integration": "yarn test -- --watch -c jest-integration.config.js",

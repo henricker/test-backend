@@ -10,7 +10,7 @@ services:
       - "3000:3000"
     env_file:
       - .env
-    command: bash -c "npm run start:$API_START_ARG"
+    command: bash -c "npm install && npm run build && npm run start:$API_START_ARG"
     networks:
       - containers-network
     depends_on:

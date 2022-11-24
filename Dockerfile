@@ -1,14 +1,5 @@
-FROM node:alpine
-
-RUN apk add --no-cache bash
+FROM node:16
 
 WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-RUN npm run build
 
 USER node
