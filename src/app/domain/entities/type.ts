@@ -1,4 +1,4 @@
 export interface Itype {
-    id: number;
-    main: string;
+  id: number;
+  main: string;
 }

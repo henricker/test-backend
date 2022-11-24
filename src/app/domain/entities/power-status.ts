@@ -1,12 +1,12 @@
-import { IPokemon } from "./pokemon";
+import { IPokemon } from './pokemon';
 
 export interface IPokemonPowerStatus {
-  id: number;     
+  id: number;
   atk: number;
-  def: number;      
+  def: number;
   sta: number;
   statTotal: number;
   cp_100_40: number;
   cp_100_39: number;
-  pokemon?: IPokemon
+  pokemon?: IPokemon;
 }

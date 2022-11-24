@@ -1,4 +1,4 @@
 export interface IWeather {
-    id: number;
-    main: string;
+  id: number;
+  main: string;
 }
