@@ -5,6 +5,7 @@ CREATE TABLE "Pokemon" (
     "pokemonEvolutionInfoId" INTEGER NOT NULL,
     "pokemonCharacteristicsId" INTEGER NOT NULL,
     "powerStatusId" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
 
     CONSTRAINT "Pokemon_pkey" PRIMARY KEY ("id")
 );
