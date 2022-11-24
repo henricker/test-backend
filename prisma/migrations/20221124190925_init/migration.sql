@@ -11,20 +11,11 @@ CREATE TABLE "Pokemon" (
 );
 
 -- CreateTable
-CREATE TABLE "TypePokemon" (
+CREATE TABLE "Type" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
-    CONSTRAINT "TypePokemon_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PokemonTypePokemon" (
-    "id" SERIAL NOT NULL,
-    "pokemonId" INTEGER NOT NULL,
-    "typePokemonId" INTEGER NOT NULL,
-
-    CONSTRAINT "PokemonTypePokemon_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Type_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -33,15 +24,6 @@ CREATE TABLE "Weather" (
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Weather_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "PokemonWeather" (
-    "id" SERIAL NOT NULL,
-    "pokemonId" INTEGER NOT NULL,
-    "weatherId" INTEGER NOT NULL,
-
-    CONSTRAINT "PokemonWeather_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -87,6 +69,30 @@ CREATE TABLE "PokemonEvolutionInfo" (
     CONSTRAINT "PokemonEvolutionInfo_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "_PokemonToType" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_PokemonToWeather" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_PokemonToType_AB_unique" ON "_PokemonToType"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_PokemonToType_B_index" ON "_PokemonToType"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_PokemonToWeather_AB_unique" ON "_PokemonToWeather"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_PokemonToWeather_B_index" ON "_PokemonToWeather"("B");
+
 -- AddForeignKey
 ALTER TABLE "Pokemon" ADD CONSTRAINT "Pokemon_pokemonEvolutionInfoId_fkey" FOREIGN KEY ("pokemonEvolutionInfoId") REFERENCES "PokemonEvolutionInfo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -97,13 +103,13 @@ ALTER TABLE "Pokemon" ADD CONSTRAINT "Pokemon_pokemonCharacteristicsId_fkey" FOR
 ALTER TABLE "Pokemon" ADD CONSTRAINT "Pokemon_powerStatusId_fkey" FOREIGN KEY ("powerStatusId") REFERENCES "PowerStatus"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PokemonTypePokemon" ADD CONSTRAINT "PokemonTypePokemon_pokemonId_fkey" FOREIGN KEY ("pokemonId") REFERENCES "Pokemon"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_PokemonToType" ADD CONSTRAINT "_PokemonToType_A_fkey" FOREIGN KEY ("A") REFERENCES "Pokemon"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PokemonTypePokemon" ADD CONSTRAINT "PokemonTypePokemon_typePokemonId_fkey" FOREIGN KEY ("typePokemonId") REFERENCES "TypePokemon"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_PokemonToType" ADD CONSTRAINT "_PokemonToType_B_fkey" FOREIGN KEY ("B") REFERENCES "Type"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PokemonWeather" ADD CONSTRAINT "PokemonWeather_pokemonId_fkey" FOREIGN KEY ("pokemonId") REFERENCES "Pokemon"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_PokemonToWeather" ADD CONSTRAINT "_PokemonToWeather_A_fkey" FOREIGN KEY ("A") REFERENCES "Pokemon"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PokemonWeather" ADD CONSTRAINT "PokemonWeather_weatherId_fkey" FOREIGN KEY ("weatherId") REFERENCES "Weather"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_PokemonToWeather" ADD CONSTRAINT "_PokemonToWeather_B_fkey" FOREIGN KEY ("B") REFERENCES "Weather"("id") ON DELETE CASCADE ON UPDATE CASCADE;
