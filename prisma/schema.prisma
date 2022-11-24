@@ -11,49 +11,60 @@ datasource db {
 }
 
 model Pokemon {
-  pokedexNumber          Int                     @id
-  typePokemon            TypePokemon             @relation(fields: [typePokemonId], references: [id])
-  typePokemonId          Int
-  weatherPokemon         WeatherPokemon[]
-  powerStatus            PowerStatus?
-  pokemonCharacteristics PokemonCharacteristics?
-  pokemonEvolutionInfo   PokemonEvolutionInfo?
+  id                     Int                    @id @default(autoincrement())
+  pokedexNumber          Int
+  PokemonTypePokemon     PokemonTypePokemon[]
+  PokemonWeather         PokemonWeather[]
+  pokemonEvolutionInfo   PokemonEvolutionInfo   @relation(fields: [pokemonEvolutionInfoId], references: [id])
+  pokemonCharacteristics PokemonCharacteristics @relation(fields: [pokemonCharacteristicsId], references: [id])
+  powerStatus            PowerStatus            @relation(fields: [powerStatusId], references: [id])
+
+  pokemonEvolutionInfoId   Int
+  pokemonCharacteristicsId Int
+  powerStatusId            Int
 }
 
 model TypePokemon {
-  id      Int       @id @default(autoincrement())
-  name    String
-  pokemon Pokemon[]
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  PokemonTypePokemon PokemonTypePokemon[]
+}
+
+model PokemonTypePokemon {
+  id            Int         @id @default(autoincrement())
+  pokemonId     Int
+  typePokemonId Int
+  pokemon       Pokemon     @relation(fields: [pokemonId], references: [id])
+  typePokemon   TypePokemon @relation(fields: [typePokemonId], references: [id])
 }
 
 model Weather {
   id             Int              @id @default(autoincrement())
   name           String
-  weatherPokemon WeatherPokemon[]
+  PokemonWeather PokemonWeather[]
 }
 
-model WeatherPokemon {
+model PokemonWeather {
   id        Int     @id @default(autoincrement())
-  weather   Weather @relation(fields: [weatherId], references: [id])
-  pokemon   Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
-  weatherId Int
   pokemonId Int
+  weatherId Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  weather   Weather @relation(fields: [weatherId], references: [id])
 }
 
 model PowerStatus {
-  id        Int     @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   atk       Int
   def       Int
   sta       Int
   statTotal Int
   cp_100_40 Int
   cp_100_39 Int
-  pokemon   Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
-  pokemonId Int     @unique
+  Pokemon   Pokemon[]
 }
 
 model PokemonCharacteristics {
-  id           Int     @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   legendary    Boolean
   aquireable   Int
   spawns       Boolean
@@ -67,15 +78,13 @@ model PokemonCharacteristics {
   futureEvolve Boolean
   crossGen     Boolean
   generation   Int
-  pokemon      Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
-  pokemonId    Int     @unique
+  Pokemon      Pokemon[]
 }
 
 model PokemonEvolutionInfo {
-  id             Int     @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   evolutionStage Int
   envolved       Boolean
   familyId       Int
-  pokemon        Pokemon @relation(fields: [pokemonId], references: [pokedexNumber])
-  pokemonId      Int     @unique
+  Pokemon        Pokemon[]
 }
