@@ -7,7 +7,6 @@
     "doc": "docs"
   },
   "scripts": {
-    "compose": "npm install && docker-compose up -d",
     "build": "tsc",
     "start": "node ./build/main/server.js",
     "start:prod": "node ./build/main/server.js",

@@ -4,15 +4,11 @@
 
 ## Como rodar ?
  - Para facilitar sua vida na correção iremos utilizar o docker!
- - renomeie o .env.example para .env
+ - Renomeie o .env.example para .env
  - Apenas rode um ```docker-compose up -d```, que automaticamente subirá um container com a api e o banco de dados postgres :D
- - Antes de tudo, vá para dentro do container da api gerada
-    ```bash
-     docker ps # => retorna os processos rodando, selecione o id do container test_backend
-     docker exec -it id_do_container sh # => lhe dá acesso ao file system do container, agora dentro do container rode os scripts abaixo!
-     npm run migrate:run # => roda as migrations
-     npm run seed # => roda as seeds!
-    ```
+ - As migrations e seeds serão geradas automaticamente :)
+ - Por padrão rodará em modo produção (prod)
+    - para rodar em modo dev ( com o watch ) basta ir em '.env' e alterar o NODE_ENV=dev) e rodar novamente o ```docker-compose up -d```
 
 ## Tecnologias utilizadas
  - Nodejs 
@@ -22,7 +18,8 @@
  - Jest
 
 ## Testes ?
- - Sim!, implementei testes unitários e de integração utilizando jest!
+ - Sim!, implementei testes unitários
+ - Em breve, farei os de integração :)
  - Por questões de contexto, rode os testes dentro do container :)
  - Criei alguns scripts para orientá-lo ao rodar os testes
    ```bash
@@ -49,9 +46,23 @@
       - wather => pesquisa pokemons pelo clima da região onde se encontram => ('Rainy', 'Sunny'...)
    ```
 
-## Sobre a escolha do framework express
+## Sobre a escolha do Express e Prisma ORM
  - Por se tratar de uma api bem simples, optei pelo uso do express, por ser um framework não tão opinativo como o NestJs ou Adonis consigo arquitetar todo o sistema da "maneira que eu quero" e assim fica melhor para você avaliar a maneira que arquitetei.
  - Estou utilizando arquitetura limpa como um dos princípios dessa aplicação, por isso utilizando o "express" consigo encaixar bem nessa arquitetura
+ - Escolhi o prisma porque:
+    - Fácil manutenção
+    - Migrations agilizadas
+    - Fácil de fazer queries
+    - Todo o banco fica centralizado, onde qualquer alteração se torna acessível
+
+## Sobre as camadas da arquitetura
+ - Domain => Se refere a camada onde está guardada as entidades e os contratos dos casos de uso da aplicação
+ - Data => A camada de dados implementa os usecases do domínio e depende de alguma interface que implemente o banco de dados e outras bibliotecas necessárias caso necessite
+ - Presentation => A camada de apresentação é a que conversa entre o ambiente externo e as camadas mais internas
+ - Infra => Camada responsável por ter as implementações de banco de dados, serviços http com base nas bibliotecas e frameworks
+ - Main => Essa é a única camada onde há acoplamento, ela é a que une todas as outras e "põe o negócio para rodar" :D
+
+ - Utilizando uma abordagem como essa, nos proporciona um código mais escalável e refatorável e testável, imagine o caso onde será necessário trocar o ORM prisma para typeorm por exemplo, bastaria trocar as implementações na camada de infra e o resto das outras camadas nem sabem qual ORM está sendo utilizado, mantendo o mesmo código :o
 
 ## Descrição das seeds
  - Para realizar as seeds do banco, resolvi converter o arquivo xlsx para csv, por questões de praticidade, utilizei o script "convert_to_csv.sh" para realizar o download da biblioteca e converter o arquivo em csv.
