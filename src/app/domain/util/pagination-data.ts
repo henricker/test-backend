@@ -3,6 +3,7 @@ export type PaginationData<T> = {
     page: number;
     limit: number;
     total: number;
+    hasNext: boolean;
   };
   data: T[];
 };
