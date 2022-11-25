@@ -1,9 +1,9 @@
-import { IPokemon } from '../../../../src/app/domain/entities/pokemon';
+import { IPokemon } from '../../../../src/domain/entities/pokemon';
 import {
   getPokemonOptionsQuery,
   IGetPokemonsUseCase,
-} from '../../../../src/app/domain/usecases/pokemon/get-pokemons-use-case';
-import { PaginationData } from '../../../../src/app/domain/util/pagination-data';
+} from '../../../../src/domain/usecases/pokemon/get-pokemons-use-case';
+import { PaginationData } from '../../../../src/domain/util/pagination-data';
 
 export class GetPokemonUseCaseMock implements IGetPokemonsUseCase {
   execute(options: getPokemonOptionsQuery): Promise<PaginationData<IPokemon>> {

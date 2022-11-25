@@ -1,6 +1,6 @@
 import { describe, it } from '@jest/globals';
 import { PokemonMockRepository } from '../../../mocks/repository/pokemon-mock-repository';
-import { DbGetPokemonUseCase } from '../../../../../src/app/data/usecases/pokemons/db-get-pokemon-use-case';
+import { DbGetPokemonUseCase } from '../../../../../src/data/usecases/pokemons/db-get-pokemon-use-case';
 
 const makeSut = () => {
   const repository = new PokemonMockRepository();

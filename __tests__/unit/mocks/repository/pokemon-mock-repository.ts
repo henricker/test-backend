@@ -1,7 +1,7 @@
-import { IPokemonRepository } from '../../../../src/app/data/repositories/pokemon/pokemon-repository';
-import { IPokemon } from '../../../../src/app/domain/entities/pokemon';
-import { getPokemonOptionsQuery } from '../../../../src/app/domain/usecases/pokemon/get-pokemons-use-case';
-import { PaginationData } from '../../../../src/app/domain/util/pagination-data';
+import { IPokemonRepository } from '../../../../src/data/repositories/pokemon/pokemon-repository';
+import { IPokemon } from '../../../../src/domain/entities/pokemon';
+import { getPokemonOptionsQuery } from '../../../../src/domain/usecases/pokemon/get-pokemons-use-case';
+import { PaginationData } from '../../../../src/domain/util/pagination-data';
 
 export class PokemonMockRepository implements IPokemonRepository {
   getPokemons(
