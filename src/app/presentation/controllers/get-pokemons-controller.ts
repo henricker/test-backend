@@ -1,6 +1,7 @@
 import { IGetPokemonsUseCase } from '../../domain/usecases/pokemon/get-pokemons-use-case';
 import { Controller } from '../protocols/controller';
 import { HttpRequest, HttpResponse } from '../protocols/http';
+import { badRequest, ok, serverError } from '../protocols/status-http';
 import { IValidator } from '../protocols/validator';
 
 export class GetPokemonsController implements Controller {
@@ -10,17 +11,18 @@ export class GetPokemonsController implements Controller {
   ) {}
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
-    const validate = await this.validator.validate(request.query);
+    try {
+      const validate = await this.validator.validate(request.query);
 
-    if (validate) {
-      return {
-        statusCode: 400,
-        body: { message: validate },
-      };
+      if (validate) {
+        return badRequest(validate);
+      }
+
+      const data = await this.getPokemonsUseCase.execute(request.query);
+
+      return ok(data);
+    } catch (err) {
+      return serverError();
     }
-
-    const data = await this.getPokemonsUseCase.execute(request.query);
-
-    return Promise.resolve({ statusCode: 200, body: data });
   }
 }

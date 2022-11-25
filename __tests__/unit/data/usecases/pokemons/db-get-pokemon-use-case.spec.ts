@@ -35,6 +35,7 @@ describe('# Usecase - get-pokemons', () => {
         total: 1,
         limit: 1,
         page: 1,
+        hasNext: false,
       },
       data: [
         {

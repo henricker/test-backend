@@ -5,9 +5,6 @@ module.exports = {
     '.+\\.ts$': 'ts-jest',
   },
   roots: ['<rootDir>/__tests__'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/main/**'
-  ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/main/**'],
   coverageDirectory: 'coverage',
 };

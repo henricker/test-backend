@@ -46,10 +46,12 @@ module.exports = {
     ],
     'class-methods-use-this': 'off',
     'import/no-unresolved': 'off',
+    'no-dupe-keys': 'off',
     'import/extensions': 'off',
     'no-unused-vars': 'off',
     'no-useless-constructor': 'off',
     'no-empty-function': 'off',
-    'max-classes-per-file': 'off'
+    'max-classes-per-file': 'off',
+    'consistent-return': 'off',
   },
 };

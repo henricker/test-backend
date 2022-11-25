@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - "3000:3000"
+      - "$PORT:$PORT"
     env_file:
       - .env
     command: bash -c "npm install && npm run build && npm run start:$API_START_ARG"

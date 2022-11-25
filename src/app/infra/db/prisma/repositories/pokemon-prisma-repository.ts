@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { IPokemonRepository } from '../../../data/repositories/pokemon/pokemon-repository';
-import { IPokemon } from '../../../domain/entities/pokemon';
-import { getPokemonOptionsQuery } from '../../../domain/usecases/pokemon/get-pokemons-use-case';
-import { PaginationData } from '../../../domain/util/pagination-data';
+import { IPokemonRepository } from '../../../../data/repositories/pokemon/pokemon-repository';
+import { IPokemon } from '../../../../domain/entities/pokemon';
+import { getPokemonOptionsQuery } from '../../../../domain/usecases/pokemon/get-pokemons-use-case';
+import { PaginationData } from '../../../../domain/util/pagination-data';
 
 export class PokemonPrismaRepository implements IPokemonRepository {
   constructor(private readonly connection: PrismaClient) {}

@@ -13,6 +13,7 @@ export class PokemonMockRepository implements IPokemonRepository {
           total: 1,
           limit: 1,
           page: 1,
+          hasNext: false,
         },
         data: [
           {

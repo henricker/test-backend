@@ -4,13 +4,13 @@
 
 ## Como rodar ?
  - Para facilitar sua vida na correção iremos utilizar o docker!
+ - renomeie o .env.example para .env
  - Apenas rode um ```docker-compose up -d```, que automaticamente subirá um container com a api e o banco de dados postgres :D
  - Antes de tudo, vá para dentro do container da api gerada
     ```bash
      docker ps # => retorna os processos rodando, selecione o id do container test_backend
      docker exec -it id_do_container sh # => lhe dá acesso ao file system do container, agora dentro do container rode os scripts abaixo!
      npm run migrate:run # => roda as migrations
-     npx prisma generate # => gera a tipagem do prisma e realiza a conexão
      npm run seed # => roda as seeds!
     ```
 
@@ -23,6 +23,7 @@
 
 ## Testes ?
  - Sim!, implementei testes unitários e de integração utilizando jest!
+ - Por questões de contexto, rode os testes dentro do container :)
  - Criei alguns scripts para orientá-lo ao rodar os testes
    ```bash
     npm run test # => roda todos os testes
@@ -32,11 +33,25 @@
    ```
 
 ## Quais as funcionalidades ?
- - É uma API bem simples, possui um crud de pokemons
+ - Por enquanto apenas adicionei algumas rotas (get) com alguns filtros
  - Realizei a criação de vários filtros de pokemons na rota de listagem dos quais irei mencionar mais abaixo
 
+## Sobre as rotas
+ - Rota /pokemons (get)
+   ```
+   # Recebe os seguintes filtros na query da requisição
+      - page, limit => responsáveis na paginação => (Obrigatórios!)
+      - name => nome do pokemon => ('pikachu')
+      - type => tipo do pokemon => ('fire', 'normal'...)
+      - evolutionStage => estágio de evolução do pokemon => (1, 2...)
+      - evolved => pokemon já no último estágio de evolução? (true, false)
+      - familyId => pesquisa os pokemons pela família => (1, 2...)
+      - wather => pesquisa pokemons pelo clima da região onde se encontram => ('Rainy', 'Sunny'...)
+   ```
+
 ## Sobre a escolha do framework express
- - Por se tratar de uma api bem simples, optei pelo uso do express, por ser um framework não tão opinativo como o NestJs ou Adonis consigo arquitetar todo o sistema da "maneira que eu quero" e assim fica melhor para você avaliar a maneira que arquitetei o sistema.
+ - Por se tratar de uma api bem simples, optei pelo uso do express, por ser um framework não tão opinativo como o NestJs ou Adonis consigo arquitetar todo o sistema da "maneira que eu quero" e assim fica melhor para você avaliar a maneira que arquitetei.
+ - Estou utilizando arquitetura limpa como um dos princípios dessa aplicação, por isso utilizando o "express" consigo encaixar bem nessa arquitetura
 
 ## Descrição das seeds
  - Para realizar as seeds do banco, resolvi converter o arquivo xlsx para csv, por questões de praticidade, utilizei o script "convert_to_csv.sh" para realizar o download da biblioteca e converter o arquivo em csv.

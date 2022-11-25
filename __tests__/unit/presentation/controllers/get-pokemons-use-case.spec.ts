@@ -40,7 +40,7 @@ describe('# Controller - get pokemons', () => {
     jest.spyOn(validator, 'validate').mockReturnValueOnce(['error', 'error']);
     const response = await controller.handle(request);
     expect(response.statusCode).toBe(400);
-    expect(response.body).toEqual({ message: ['error', 'error'] });
+    expect(response.body).toEqual({ message: 'error, error' });
   });
 
   it('Should call getPokemonsUseCase with correct params', async () => {
@@ -52,6 +52,14 @@ describe('# Controller - get pokemons', () => {
       page: 1,
       name: 'pikachu',
     });
+  });
+
+  it('Should return 500 if getPokemonsUseCase throws', async () => {
+    const { useCase, controller } = makeSut();
+    jest.spyOn(useCase, 'execute').mockRejectedValueOnce(new Error());
+    const response = await controller.handle(request);
+    expect(response.statusCode).toBe(500);
+    expect(response.body).toEqual({ message: 'Internal server error' });
   });
 
   it('Should error 200 with correct data', async () => {

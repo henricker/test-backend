@@ -1,9 +1,8 @@
-import http from 'http';
+import 'dotenv/config';
+import { setupApp } from '../infra/express/config/app';
 
-export const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello Worl')
-}).listen(3000, () => {
-    console.log('Server running on port 3000');
-})
+const app = setupApp();
+
+app.listen(process.env.PORT, () =>
+  console.log(`Server running at PORT ${process.env.PORT}`)
+);
