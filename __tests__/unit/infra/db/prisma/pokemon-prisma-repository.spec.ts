@@ -1,5 +1,5 @@
 import { describe, it } from '@jest/globals';
-import { PokemonPrismaRepository } from '../../../../../src/app/infra/db/prisma/pokemon-prisma-repository';
+import { PokemonPrismaRepository } from '../../../../../src/app/infra/db/prisma/repositories/pokemon-prisma-repository';
 import { prismaMock } from '../../../mocks/infra/prisma-client.mock';
 
 const makeSut = () => {
