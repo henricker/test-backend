@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "compose": "npm install && docker-compose up -d",
     "build": "tsc",
     "start:prod": "node ./build/main/server.js",
     "start:dev": "npx ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules src/main/server.ts",
@@ -16,7 +17,7 @@
     "test:ci": "npm run test -- --coverage",
     "migrate:create": "npx prisma migrate dev --name",
     "migrate:run": "npx prisma migrate deploy",
-    "seed": "npx ts-node ./src/app/infra/db/prisma/seeds/seed.ts",
+    "seed": "npx ts-node ./src/infra/db/prisma/seeds/seed.ts",
     "lint": "npx eslint --fix --ext .ts ."
   },
   "repository": {
@@ -58,6 +59,6 @@
     "yup": "0.32.11"
   },
   "prisma": {
-    "schema": "src/app/infra/db/schema.prisma"
+    "schema": "src/infra/db/prisma/schema.prisma"
   }
 }

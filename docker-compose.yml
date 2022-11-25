@@ -10,7 +10,7 @@ services:
       - "$PORT:$PORT"
     env_file:
       - .env
-    command: bash -c "npm install && npm run build && npm run start:$API_START_ARG"
+    command: bash -c "npx prisma migrate deploy && npm run seed && npx prisma generate && npm run build && npm run start:$API_START_ARG"
     networks:
       - containers-network
     depends_on:
