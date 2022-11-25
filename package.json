@@ -9,6 +9,7 @@
   "scripts": {
     "compose": "npm install && docker-compose up -d",
     "build": "tsc",
+    "start": "node ./build/main/server.js",
     "start:prod": "node ./build/main/server.js",
     "start:dev": "npx ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules src/main/server.ts",
     "test": "npx jest --passWithNoTests --silent --noStackTrace --runInBand",
