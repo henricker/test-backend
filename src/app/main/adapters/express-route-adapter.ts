@@ -4,9 +4,9 @@ import { Controller } from '../../presentation/protocols/controller';
 export const expressAdapterRoute =
   (controller: Controller) => async (req: Request, res: Response) => {
     const httpRequest = {
-      ...(req.body || {}),
-      ...(req.params || {}),
-      ...(req.query || {}),
+      body: req.body,
+      query: req.query,
+      params: req.params,
     };
 
     const httpResponse = await controller.handle(httpRequest);

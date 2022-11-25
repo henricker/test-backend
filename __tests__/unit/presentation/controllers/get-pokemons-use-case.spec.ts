@@ -37,7 +37,7 @@ describe('# Controller - get pokemons', () => {
 
   it('Should return 400 if validate return an error', async () => {
     const { validator, controller } = makeSut();
-    jest.spyOn(validator, 'validate').mockReturnValueOnce(['error', 'error']);
+    jest.spyOn(validator, 'validate').mockReturnValueOnce('error, error');
     const response = await controller.handle(request);
     expect(response.statusCode).toBe(400);
     expect(response.body).toEqual({ message: 'error, error' });

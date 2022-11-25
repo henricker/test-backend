@@ -1,4 +1,8 @@
-import { IGetPokemonsUseCase } from '../../domain/usecases/pokemon/get-pokemons-use-case';
+import { isObject } from 'util';
+import {
+  getPokemonOptionsQuery,
+  IGetPokemonsUseCase,
+} from '../../domain/usecases/pokemon/get-pokemons-use-case';
 import { Controller } from '../protocols/controller';
 import { HttpRequest, HttpResponse } from '../protocols/http';
 import { badRequest, ok, serverError } from '../protocols/status-http';
@@ -14,11 +18,13 @@ export class GetPokemonsController implements Controller {
     try {
       const validate = await this.validator.validate(request.query);
 
-      if (validate) {
+      if (typeof validate === 'string') {
         return badRequest(validate);
       }
 
-      const data = await this.getPokemonsUseCase.execute(request.query);
+      const data = await this.getPokemonsUseCase.execute(
+        validate as getPokemonOptionsQuery
+      );
 
       return ok(data);
     } catch (err) {

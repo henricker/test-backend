@@ -3,7 +3,7 @@ import { getPokemonOptionsQuery } from '../../../domain/usecases/pokemon/get-pok
 import { IValidator } from '../../../presentation/protocols/validator';
 
 export class GetPokemonValidator implements IValidator {
-  async validate(input: getPokemonOptionsQuery): Promise<string[] | void> {
+  async validate(input: getPokemonOptionsQuery): Promise<string[] | {}> {
     const schema = yup.object().shape({
       limit: yup.number().positive().integer().required(),
       page: yup.number().positive().integer().required(),
@@ -16,7 +16,8 @@ export class GetPokemonValidator implements IValidator {
     });
 
     try {
-      await schema.validate(input, { abortEarly: false });
+      const parsed = await schema.validate(input, { abortEarly: false });
+      return parsed;
     } catch (err) {
       return err.errors.join(', ');
     }
