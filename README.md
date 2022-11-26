@@ -45,6 +45,15 @@
       - familyId => pesquisa os pokemons pela família => (1, 2...)
       - wather => pesquisa pokemons pelo clima da região onde se encontram => ('Rainy', 'Sunny'...)
    ```
+ - Rota /pokemons/id
+   ```
+   # Recebe o parâmetro id
+    - Caso seja enviado um id inválido retornará 400 com uma mensagem de id inválido
+    - Semelhante ao /pokemons, mas retorna apenas um pokemon
+   ```
+
+## Segurança
+ - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto
 
 ## Sobre a escolha do Express e Prisma ORM
  - Por se tratar de uma api bem simples, optei pelo uso do express, por ser um framework não tão opinativo como o NestJs ou Adonis consigo arquitetar todo o sistema da "maneira que eu quero" e assim fica melhor para você avaliar a maneira que arquitetei.
