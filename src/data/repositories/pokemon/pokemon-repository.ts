@@ -6,4 +6,6 @@ export interface IPokemonRepository {
   getPokemons(
     options: getPokemonOptionsQuery
   ): Promise<PaginationData<IPokemon>>;
+
+  getPokemonById(id: number): Promise<IPokemon | null>;
 }

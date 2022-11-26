@@ -1,6 +1,7 @@
 import { describe, it } from '@jest/globals';
 import { PokemonMockRepository } from '../../../mocks/repository/pokemon-mock-repository';
-import { DbGetPokemonUseCase } from '../../../../../src/data/usecases/pokemons/db-get-pokemon-use-case';
+import { DbGetPokemonUseCase } from '../../../../../src/data/usecases/pokemons/db-get-pokemon';
+import pokemonMock from '../../../mocks/entities/pokemon-mock';
 
 const makeSut = () => {
   const repository = new PokemonMockRepository();
@@ -19,6 +20,7 @@ describe('# Usecase - get-pokemons', () => {
     await usecase.execute({ limit: 1, page: 1 });
     expect(getPokemonsSpy).toHaveBeenCalledWith({ limit: 1, page: 1 });
   });
+
   it('Should throw if repository throws', async () => {
     const { repository, usecase } = makeSut();
     jest.spyOn(repository, 'getPokemons').mockRejectedValueOnce(() => {
@@ -27,6 +29,17 @@ describe('# Usecase - get-pokemons', () => {
 
     await expect(usecase.execute({ limit: 1, page: 1 })).rejects.toThrow();
   });
+
+  it('Should return empty array if pokemons not found', async () => {
+    const { repository, usecase } = makeSut();
+    jest
+      .spyOn(repository, 'getPokemons')
+      .mockResolvedValueOnce({ data: [], total: 0 } as never);
+
+    const result = await usecase.execute({ limit: 1, page: 1 });
+    expect(result).toStrictEqual({ data: [], total: 0 });
+  });
+
   it('Should return correct data', () => {
     const { usecase } = makeSut();
     const result = usecase.execute({ limit: 1, page: 1 });
@@ -37,13 +50,7 @@ describe('# Usecase - get-pokemons', () => {
         page: 1,
         hasNext: false,
       },
-      data: [
-        {
-          id: 1,
-          pokedexNumber: 1,
-          name: 'Bulbasaur',
-        },
-      ],
+      data: [pokemonMock],
     });
   });
 });

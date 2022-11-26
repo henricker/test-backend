@@ -4,6 +4,7 @@ import {
   IGetPokemonsUseCase,
 } from '../../../../src/domain/usecases/pokemon/get-pokemons-use-case';
 import { PaginationData } from '../../../../src/domain/util/pagination-data';
+import pokemonMock from '../entities/pokemon-mock';
 
 export class GetPokemonUseCaseMock implements IGetPokemonsUseCase {
   execute(options: getPokemonOptionsQuery): Promise<PaginationData<IPokemon>> {
@@ -14,7 +15,7 @@ export class GetPokemonUseCaseMock implements IGetPokemonsUseCase {
         page: 1,
         hasNext: false,
       },
-      data: [],
+      data: [pokemonMock],
     });
   }
 }

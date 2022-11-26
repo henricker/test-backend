@@ -14,6 +14,13 @@ export const serverError = (): HttpResponse => ({
   },
 });
 
+export const notFound = (message: string): HttpResponse => ({
+  statusCode: 404,
+  body: {
+    message,
+  },
+});
+
 export const ok = (data: any): HttpResponse => ({
   statusCode: 200,
   body: data,

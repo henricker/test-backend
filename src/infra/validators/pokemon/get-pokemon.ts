@@ -13,6 +13,7 @@ export class GetPokemonValidator implements IValidator {
       envolved: yup.boolean().optional(),
       familyId: yup.number().positive().integer().optional(),
       weather: yup.string().min(3).optional(),
+      statTotal: yup.number().positive().integer().optional(),
     });
 
     try {

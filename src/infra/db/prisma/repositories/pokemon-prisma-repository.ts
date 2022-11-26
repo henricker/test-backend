@@ -64,4 +64,27 @@ export class PokemonPrismaRepository implements IPokemonRepository {
       },
     };
   }
+
+  async getPokemonById(id: number): Promise<IPokemon | null> {
+    return this.connection.pokemon.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        powerStatus: true,
+        pokemonEvolutionInfo: true,
+        pokemonCharacteristics: true,
+        type: {
+          select: {
+            name: true,
+          },
+        },
+        weather: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+  }
 }

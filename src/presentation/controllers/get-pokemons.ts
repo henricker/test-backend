@@ -1,4 +1,3 @@
-import { isObject } from 'util';
 import {
   getPokemonOptionsQuery,
   IGetPokemonsUseCase,

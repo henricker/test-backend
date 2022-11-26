@@ -10,7 +10,7 @@
     "build": "tsc",
     "start": "node ./build/main/server.js",
     "start:prod": "node ./build/main/server.js",
-    "start:dev": "npx ts-node-dev --respawn --transpile-only --inspect --ignore-watch node_modules src/main/server.ts",
+    "start:dev": "npx ts-node-dev --exit-child --respawn --transpile-only --inspect --ignore-watch node_modules src/main/server.ts",
     "test": "npx jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:unit": "npm run test -- --watch -c jest-unit.config.js",
     "test:integration": "yarn test -- --watch -c jest-integration.config.js",

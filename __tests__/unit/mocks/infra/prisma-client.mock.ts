@@ -4,5 +4,6 @@ export const prismaMock = {
   pokemon: {
     findMany: jest.fn,
     count: jest.fn(() => Number),
+    findUnique: jest.fn,
   },
 };
