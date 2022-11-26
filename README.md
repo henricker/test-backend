@@ -30,8 +30,15 @@
    ```
 
 ## Quais as funcionalidades ?
- - Por enquanto apenas adicionei algumas rotas (get) com alguns filtros
- - Realizei a criação de vários filtros de pokemons na rota de listagem dos quais irei mencionar mais abaixo
+ - O sistema possui dois endpoints públicos 
+   - /api/pokemons e /api/pokemons/id (GET)
+ - Possui um cadastro de usuários
+   - /api/user (POST)
+ - Possuirá autenticação
+   - /api/auth (POST)
+ - Será criado duas rota privada para adição dos pokemons em uma lista de favoritos do usuário
+   - /api/user/pokemons (POST) => adiciona pokemons na lista de favoritos
+   - /api/user/pokemons (GET) => retorna a lista de pokemons favoritos do usuário
 
 ## Sobre as rotas
  - Rota /pokemons (get)
@@ -51,9 +58,17 @@
     - Caso seja enviado um id inválido retornará 400 com uma mensagem de id inválido
     - Semelhante ao /pokemons, mas retorna apenas um pokemon
    ```
+ - Rota /user
+   ```
+   # Recebe no body: username, email, password
+    - Caso seja enviado dados inválidos terá um retorno 400 com os erros
+    - Regras de negócio infrigidas como email e username já existentes retornarão 400 com uma mensagem
+    - Cria um usuário no banco de dados, realiza o hash da senha e cria o token jwt para o usuário
+    - Retorna status 200, alguns dados do usuário (email, username, id) e o token jwt 
+   ```
 
 ## Segurança
- - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto
+ - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto por IP
 
 ## Sobre a escolha do Express e Prisma ORM
  - Por se tratar de uma api bem simples, optei pelo uso do express, por ser um framework não tão opinativo como o NestJs ou Adonis consigo arquitetar todo o sistema da "maneira que eu quero" e assim fica melhor para você avaliar a maneira que arquitetei.
