@@ -1,12 +1,12 @@
-import { IGetPokemonByIdUseCase } from '../../domain/usecases/pokemon/get-pokemon-by-id';
-import { Controller } from '../protocols/controller';
-import { HttpRequest, HttpResponse } from '../protocols/http';
+import { IGetPokemonByIdUseCase } from '../../../domain/usecases/pokemon/get-pokemon-by-id';
+import { Controller } from '../../protocols/controller';
+import { HttpRequest, HttpResponse } from '../../protocols/http';
 import {
   badRequest,
   notFound,
   ok,
   serverError,
-} from '../protocols/status-http';
+} from '../../protocols/status-http';
 
 export class GetPokemonByIDController implements Controller {
   constructor(

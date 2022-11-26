@@ -17,6 +17,9 @@ describe('# Infra - Prisma - Pokemon Prisma Repository', () => {
       page: 1,
       name: 'Pikachu',
       type: 'electric',
+      evolutionStage: 1,
+      familyId: 1,
+      weather: 'Sunny',
     };
 
     it('Should call findmany and count of prisma client with correct conditions and pagination params', async () => {
@@ -24,9 +27,9 @@ describe('# Infra - Prisma - Pokemon Prisma Repository', () => {
       const where = {
         name: options?.name,
         pokemonEvolutionInfo: {
-          evolutionStage: undefined,
+          evolutionStage: 1,
           envolved: undefined,
-          familyId: undefined,
+          familyId: 1,
         },
         type: {
           some: {
@@ -35,7 +38,7 @@ describe('# Infra - Prisma - Pokemon Prisma Repository', () => {
         },
         weather: {
           some: {
-            name: undefined,
+            name: 'Sunny',
           },
         },
       };

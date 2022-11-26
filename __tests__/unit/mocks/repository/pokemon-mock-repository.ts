@@ -1,6 +1,6 @@
 import { IPokemonRepository } from '../../../../src/data/repositories/pokemon/pokemon-repository';
 import { IPokemon } from '../../../../src/domain/entities/pokemon';
-import { getPokemonOptionsQuery } from '../../../../src/domain/usecases/pokemon/get-pokemons-use-case';
+import { getPokemonOptionsQuery } from '../../../../src/domain/usecases/pokemon/get-pokemons';
 import { PaginationData } from '../../../../src/domain/util/pagination-data';
 import pokemonMock from '../entities/pokemon-mock';
 

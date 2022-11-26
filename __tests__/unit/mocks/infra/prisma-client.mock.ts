@@ -6,4 +6,8 @@ export const prismaMock = {
     count: jest.fn(() => Number),
     findUnique: jest.fn,
   },
+  user: {
+    findUnique: jest.fn,
+    create: jest.fn,
+  },
 };

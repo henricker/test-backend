@@ -1,6 +1,7 @@
 import * as yup from 'yup';
-import { getPokemonOptionsQuery } from '../../../domain/usecases/pokemon/get-pokemons-use-case';
+import { getPokemonOptionsQuery } from '../../../domain/usecases/pokemon/get-pokemons';
 import { IValidator } from '../../../presentation/protocols/validator';
+import { validator } from '../validator';
 
 export class GetPokemonValidator implements IValidator {
   async validate(input: getPokemonOptionsQuery): Promise<string[] | {}> {
@@ -16,11 +17,6 @@ export class GetPokemonValidator implements IValidator {
       statTotal: yup.number().positive().integer().optional(),
     });
 
-    try {
-      const parsed = await schema.validate(input, { abortEarly: false });
-      return parsed;
-    } catch (err) {
-      return err.errors.join(', ');
-    }
+    return validator(schema, input);
   }
 }

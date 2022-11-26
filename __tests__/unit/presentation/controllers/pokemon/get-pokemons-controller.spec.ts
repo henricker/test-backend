@@ -1,8 +1,8 @@
 import { describe, it } from '@jest/globals';
-import { GetPokemonUseCaseMock } from '../../mocks/usecase/get-pokemon-use-case-mock';
-import { GetPokemonsController } from '../../../../src/presentation/controllers/get-pokemons';
-import { ValidatorMock } from '../../mocks/validator/validator-mock';
-import pokemonMock from '../../mocks/entities/pokemon-mock';
+import { GetPokemonUseCaseMock } from '../../../mocks/usecase/pokemon/get-pokemon-use-case-mock';
+import { GetPokemonsController } from '../../../../../src/presentation/controllers/pokemon/get-pokemons';
+import { ValidatorMock } from '../../../mocks/validator/validator-mock';
+import pokemonMock from '../../../mocks/entities/pokemon-mock';
 
 const makeSut = () => {
   const useCase = new GetPokemonUseCaseMock();

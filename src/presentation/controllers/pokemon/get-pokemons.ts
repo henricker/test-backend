@@ -1,11 +1,11 @@
 import {
   getPokemonOptionsQuery,
   IGetPokemonsUseCase,
-} from '../../domain/usecases/pokemon/get-pokemons-use-case';
-import { Controller } from '../protocols/controller';
-import { HttpRequest, HttpResponse } from '../protocols/http';
-import { badRequest, ok, serverError } from '../protocols/status-http';
-import { IValidator } from '../protocols/validator';
+} from '../../../domain/usecases/pokemon/get-pokemons';
+import { Controller } from '../../protocols/controller';
+import { HttpRequest, HttpResponse } from '../../protocols/http';
+import { badRequest, ok, serverError } from '../../protocols/status-http';
+import { IValidator } from '../../protocols/validator';
 
 export class GetPokemonsController implements Controller {
   constructor(

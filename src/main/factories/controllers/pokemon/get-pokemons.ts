@@ -1,5 +1,5 @@
 import { GetPokemonValidator } from '../../../../infra/validators/pokemon/get-pokemon';
-import { GetPokemonsController } from '../../../../presentation/controllers/get-pokemons';
+import { GetPokemonsController } from '../../../../presentation/controllers/pokemon/get-pokemons';
 import { Controller } from '../../../../presentation/protocols/controller';
 import { makeGetPokemonUseCase } from '../../usecases/pokemon/get-pokemon';
 

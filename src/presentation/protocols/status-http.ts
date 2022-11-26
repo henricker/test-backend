@@ -1,9 +1,9 @@
 import { HttpResponse } from './http';
 
-export const badRequest = (error: string | string[]): HttpResponse => ({
+export const badRequest = (error: string): HttpResponse => ({
   statusCode: 400,
   body: {
-    message: Array.isArray(error) ? error.join(', ') : error,
+    message: error,
   },
 });
 

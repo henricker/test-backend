@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { setupApp } from '../infra/express/config/app';
+import { setupApp } from '../infra/http/express/config/app';
 
 const app = setupApp();
 

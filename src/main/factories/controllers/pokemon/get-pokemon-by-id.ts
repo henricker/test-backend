@@ -1,4 +1,4 @@
-import { GetPokemonByIDController } from '../../../../presentation/controllers/get-pokemon-by-id';
+import { GetPokemonByIDController } from '../../../../presentation/controllers/pokemon/get-pokemon-by-id';
 import { Controller } from '../../../../presentation/protocols/controller';
 import { makeGetPokemonByIdUseCase } from '../../usecases/pokemon/get-pokemon-by-id';
 

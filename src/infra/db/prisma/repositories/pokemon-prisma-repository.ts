@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { IPokemonRepository } from '../../../../data/repositories/pokemon/pokemon-repository';
 import { IPokemon } from '../../../../domain/entities/pokemon';
-import { getPokemonOptionsQuery } from '../../../../domain/usecases/pokemon/get-pokemons-use-case';
+import { getPokemonOptionsQuery } from '../../../../domain/usecases/pokemon/get-pokemons';
 import { PaginationData } from '../../../../domain/util/pagination-data';
 
 export class PokemonPrismaRepository implements IPokemonRepository {
@@ -11,20 +11,20 @@ export class PokemonPrismaRepository implements IPokemonRepository {
     options: getPokemonOptionsQuery
   ): Promise<PaginationData<IPokemon>> {
     const where = {
-      name: options?.name,
+      name: options.name,
       pokemonEvolutionInfo: {
-        evolutionStage: options?.evolutionStage,
-        envolved: options?.evolved,
-        familyId: options?.familyId,
+        evolutionStage: options.evolutionStage,
+        envolved: options.evolved,
+        familyId: options.familyId,
       },
       type: {
         some: {
-          name: options?.type,
+          name: options.type,
         },
       },
       weather: {
         some: {
-          name: options?.weather,
+          name: options.weather,
         },
       },
     };

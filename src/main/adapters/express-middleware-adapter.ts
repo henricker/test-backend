@@ -6,7 +6,7 @@ export const adaptMiddleware =
   async (req: Request, res: Response, next: NextFunction) => {
     const request = {
       accessToken: req.headers?.['x-access-token'],
-      ...(req.headers || {}),
+      headers: req?.headers,
     };
 
     const httpResponse = await middleware.handle(request);

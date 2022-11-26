@@ -2,7 +2,7 @@ import { IPokemon } from '../../../domain/entities/pokemon';
 import {
   getPokemonOptionsQuery,
   IGetPokemonsUseCase,
-} from '../../../domain/usecases/pokemon/get-pokemons-use-case';
+} from '../../../domain/usecases/pokemon/get-pokemons';
 import { PaginationData } from '../../../domain/util/pagination-data';
 import { IPokemonRepository } from '../../repositories/pokemon/pokemon-repository';
 
