@@ -29,7 +29,7 @@ export class CreateUserController implements Controller {
       return ok(data);
     } catch (err) {
       if (err instanceof BusinessError) {
-        return badRequest(err.message);
+        return badRequest(err.message, err.statusCode);
       }
 
       return serverError();
