@@ -19,7 +19,7 @@ export class DbAuthUseCase implements IAuthUseCase {
     const user = await this.userRepository.findUserByEmail(options.email);
 
     if (!user) {
-      throw new BusinessError('User not found', 404);
+      throw new BusinessError('User not found', 401);
     }
 
     const isValidPassword = await this.hashService.compareHash(

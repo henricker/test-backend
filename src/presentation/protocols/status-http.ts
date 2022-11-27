@@ -21,7 +21,7 @@ export const notFound = (message: string): HttpResponse => ({
   },
 });
 
-export const ok = (data: any): HttpResponse => ({
-  statusCode: 200,
+export const ok = (data: any, statusCode = 200): HttpResponse => ({
+  statusCode,
   body: data,
 });
