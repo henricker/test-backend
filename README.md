@@ -30,11 +30,11 @@
    ```
 
 ## Quais as funcionalidades ?
- - O sistema possui dois endpoints públicos 
+ - Endpoints públicos 
    - /api/pokemons e /api/pokemons/id (GET)
- - Possui um cadastro de usuários
+ - Cadastro de usuários
    - /api/user (POST)
- - Possuirá autenticação
+ - Rota de autenticação
    - /api/auth (POST)
  - Será criado duas rota privada para adição dos pokemons em uma lista de favoritos do usuário
    - /api/user/pokemons (POST) => adiciona pokemons na lista de favoritos
