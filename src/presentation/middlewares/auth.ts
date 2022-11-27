@@ -9,7 +9,12 @@ export class AuthMiddleware implements Middleware {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const token = httpRequest.headers?.authorization?.split(' ')[1];
+      const token = httpRequest.headers.authorization?.split(' ')[1];
+
+      if (!token) {
+        throw new BusinessError('Invalid token provided', 401);
+      }
+
       const user = await this.getUserByTokenUseCase.execute(token);
       return ok(user);
     } catch (err) {
