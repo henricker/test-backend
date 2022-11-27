@@ -41,7 +41,7 @@
    - /api/user/pokemons (GET) => retorna a lista de pokemons favoritos do usuário
 
 ## Sobre as rotas
- - Rota /pokemons (get)
+ - Rota /api/pokemons (get)
    ```
    # Recebe os seguintes filtros na query da requisição
       - page, limit => responsáveis na paginação => (Obrigatórios!)
@@ -52,13 +52,14 @@
       - familyId => pesquisa os pokemons pela família => (1, 2...)
       - wather => pesquisa pokemons pelo clima da região onde se encontram => ('Rainy', 'Sunny'...)
    ```
- - Rota /pokemons/id
+ - Rota /api/pokemons/id
    ```
    # Recebe o parâmetro id
     - Caso seja enviado um id inválido retornará 400 com uma mensagem de id inválido
     - Semelhante ao /pokemons, mas retorna apenas um pokemon
    ```
- - Rota /user
+ - Rota /api/users
+
    ```
    # Recebe no body: username, email, password
     - Caso seja enviado dados inválidos terá um retorno 400 com os erros
@@ -66,6 +67,14 @@
     - Cria um usuário no banco de dados, realiza o hash da senha e cria o token jwt para o usuário
     - Retorna status 200, alguns dados do usuário (email, username, id) e o token jwt 
    ```
+- Rota /api/auth
+  ```
+  # Recebe no body: email e password
+  - Caso seja enviado dados inválidos terá retorno 400 com os erros
+  - Regras de negócio como email não existente e senha inválida retornarão códigos 401 com 'Invalid credentials'
+  - Realiza o login do usuário, checa a senha e cria um token jwt
+  - retorna status 200, alguns dados básicos do usuário e o token jwt
+  ```
 
 ## Segurança
  - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto por IP

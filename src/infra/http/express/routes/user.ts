@@ -3,5 +3,5 @@ import { expressAdapterRoute } from '../../../../main/adapters/express-route-ada
 import { makeCreateUserControllerFactory } from '../../../../main/factories/controllers/user/create-user';
 
 export default (router: Router): void => {
-  router.post('/user', expressAdapterRoute(makeCreateUserControllerFactory()));
+  router.post('/users', expressAdapterRoute(makeCreateUserControllerFactory()));
 };
