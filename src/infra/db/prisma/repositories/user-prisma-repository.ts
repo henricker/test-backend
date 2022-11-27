@@ -23,4 +23,10 @@ export class UserPrismaRepository implements IUserRepository {
       where: { username },
     });
   }
+
+  findUserById(id: number): Promise<IUser> {
+    return this.connection.user.findUnique({
+      where: { id },
+    });
+  }
 }

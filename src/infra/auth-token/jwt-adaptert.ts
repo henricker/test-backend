@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { IJwt } from '../../data/protocols/jwt';
+import { BusinessError } from '../../domain/errors/business-error';
 
 export class JwtAdapter implements IJwt {
   sign(payload: any): Promise<string> {
@@ -11,10 +12,13 @@ export class JwtAdapter implements IJwt {
   }
 
   verify(token: string): Promise<string | {}> {
-    try {
-      return Promise.resolve(jwt.verify(token, process.env.JWT_SECRET_KEY));
-    } catch (err) {
-      return Promise.reject(err);
-    }
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, process.env.JWT_SECRET_KEY, (error, decoded) => {
+        if (error) {
+          reject(new BusinessError('Invalid token provided', 401));
+        }
+        resolve(decoded);
+      });
+    });
   }
 }

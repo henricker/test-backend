@@ -4,15 +4,17 @@ import { Middleware } from '../../presentation/protocols/middleware';
 export const adaptMiddleware =
   (middleware: Middleware) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const request = {
-      accessToken: req.headers?.['x-access-token'],
-      headers: req?.headers,
+    const httpRequest = {
+      headers: { ...req.headers, authorization: req.headers.authorization },
+      body: req.body,
+      params: req.params,
+      query: req.query,
     };
 
-    const httpResponse = await middleware.handle(request);
+    const httpResponse = await middleware.handle(httpRequest);
 
     if (httpResponse.statusCode === 200) {
-      Object.assign(req, httpResponse.body);
+      Reflect.set(req, 'user', httpResponse.body);
       next();
     } else {
       res.status(httpResponse.statusCode).json({

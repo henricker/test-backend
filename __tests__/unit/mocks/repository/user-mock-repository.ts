@@ -18,4 +18,8 @@ export class UserMockRepository implements IUserRepository {
   findUserByUsername(username: string): Promise<IUser | null> {
     return Promise.resolve(userMock);
   }
+
+  findUserById(id: number): Promise<IUser | null> {
+    return Promise.resolve(userMock);
+  }
 }

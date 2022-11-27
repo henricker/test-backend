@@ -79,4 +79,27 @@ describe('# Infra - Prisma - User Prisma Repository', () => {
       await expect(promise).rejects.toThrow();
     });
   });
+
+  describe('findUserByid', () => {
+    it('should call prisma.user.findUnique with correct values', async () => {
+      const { repository } = makeSut();
+      const findUniqueSpy = jest.spyOn(prismaMock.user, 'findUnique');
+
+      await repository.findUserById(1);
+
+      expect(findUniqueSpy).toHaveBeenCalledWith({
+        where: { id: 1 },
+      });
+    });
+    it('should throw if prisma.user.findUnique throws', async () => {
+      const { repository } = makeSut();
+      jest
+        .spyOn(prismaMock.user, 'findUnique')
+        .mockRejectedValueOnce(new Error() as never);
+
+      const promise = repository.findUserById(1);
+
+      await expect(promise).rejects.toThrow();
+    });
+  });
 });
