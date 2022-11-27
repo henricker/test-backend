@@ -45,7 +45,7 @@ describe('# Usecase - Auth', () => {
     jest.spyOn(repository, 'findUserByEmail').mockResolvedValueOnce(null);
 
     await expect(useCase.execute(params)).rejects.toEqual(
-      new BusinessError('User not found', 404)
+      new BusinessError('Invalid credentials', 404)
     );
   });
 
@@ -66,7 +66,7 @@ describe('# Usecase - Auth', () => {
       .mockResolvedValueOnce(false);
 
     await expect(useCase.execute(params)).rejects.toEqual(
-      new BusinessError('Invalid password', 401)
+      new BusinessError('Invalid credentials', 401)
     );
 
     expect(compareSpy).toHaveBeenCalledWith(params.password, 'hashedpassword');

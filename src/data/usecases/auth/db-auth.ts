@@ -19,7 +19,7 @@ export class DbAuthUseCase implements IAuthUseCase {
     const user = await this.userRepository.findUserByEmail(options.email);
 
     if (!user) {
-      throw new BusinessError('User not found', 401);
+      throw new BusinessError('Invalid credentials', 401);
     }
 
     const isValidPassword = await this.hashService.compareHash(
@@ -28,7 +28,7 @@ export class DbAuthUseCase implements IAuthUseCase {
     );
 
     if (!isValidPassword) {
-      throw new BusinessError('Invalid password', 401);
+      throw new BusinessError('Invalid credentials', 401);
     }
 
     const token = await this.jwtService.sign(user.id);
