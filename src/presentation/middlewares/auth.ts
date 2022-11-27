@@ -16,7 +16,7 @@ export class AuthMiddleware implements Middleware {
       }
 
       const user = await this.getUserByTokenUseCase.execute(token);
-      return ok(user);
+      return ok({ user });
     } catch (err) {
       if (err instanceof BusinessError) {
         return badRequest(err.message, err.statusCode);

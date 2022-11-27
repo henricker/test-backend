@@ -75,6 +75,6 @@ describe('# Middleware - Auth', () => {
     const expectedUser = { ...userMock };
     Reflect.deleteProperty(expectedUser, 'password');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(expectedUser);
+    expect(response.body).toEqual({ user: expectedUser });
   });
 });

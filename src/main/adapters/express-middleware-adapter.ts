@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { NextFunction, Request, Response } from 'express';
 import { Middleware } from '../../presentation/protocols/middleware';
 
@@ -14,7 +15,7 @@ export const adaptMiddleware =
     const httpResponse = await middleware.handle(httpRequest);
 
     if (httpResponse.statusCode === 200) {
-      Reflect.set(req, 'user', httpResponse.body);
+      Object.assign(req, httpResponse.body);
       next();
     } else {
       res.status(httpResponse.statusCode).json({
