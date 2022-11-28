@@ -41,12 +41,13 @@
  - Endpoints públicos 
    - /api/pokemons e /api/pokemons/id (GET)
  - Cadastro de usuários
-   - /api/user (POST)
+   - /api/users (POST)
  - Rota de autenticação
    - /api/auth (POST)
- - Será criado duas rota privada para adição dos pokemons em uma lista de favoritos do usuário
-   - /api/user/pokemons (POST) => adiciona pokemons na lista de favoritos
-   - /api/user/pokemons (GET) => retorna a lista de pokemons favoritos do usuário
+ - Rotas privadas: (necessário autenticação)
+   - /api/users/pokemons (POST) => adiciona pokemons na lista de favoritos
+   - /api/users/pokemons (GET) => retorna a lista de pokemons favoritos do usuário
+   - /api/users/pokemons (DELETE) => recebe uma lista de pokemons para remover da lista de favoritos
 
 ## Sobre as rotas
 - Rota /api/pokemons (get)
