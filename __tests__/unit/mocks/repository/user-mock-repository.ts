@@ -10,8 +10,13 @@ import { PaginationData } from '../../../../src/domain/util/pagination-data';
 import { userMock } from '../entities/user-mock';
 import pokemonMock from '../entities/pokemon-mock';
 import { GetPokemonsFavoriteOptions } from '../../../../src/domain/usecases/user/pokemon/get-pokemons-favorite';
+import { DeleteFavoritePokemonsOptions } from '../../../../src/domain/usecases/user/pokemon/delete-favorite-pokemons';
 
 export class UserMockRepository implements IUserRepository {
+  async deleteFavoritePokemons(
+    options: DeleteFavoritePokemonsOptions
+  ): Promise<void> {}
+
   async addPokemonsFavorite(
     options: AddPokemonFavoriteOptions
   ): Promise<void> {}

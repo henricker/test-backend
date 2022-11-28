@@ -190,4 +190,40 @@ describe('# Infra - Prisma - User Prisma Repository', () => {
       await expect(promise).rejects.toThrow();
     });
   });
+
+  describe('deleteFavoritePokemons()', () => {
+    it('Should call prisma.user.update with correct values', async () => {
+      const { repository } = makeSut();
+
+      const updateSpy = jest.spyOn(prismaMock.user, 'update');
+
+      await repository.deleteFavoritePokemons({
+        userId: 1,
+        pokemonsIds: [1, 2],
+      });
+
+      expect(updateSpy).toHaveBeenCalledWith({
+        where: { id: 1 },
+        data: {
+          favoritesPokemons: {
+            disconnect: [{ id: 1 }, { id: 2 }],
+          },
+        },
+      });
+    });
+
+    it('Should throw if prisma.user.update throws', async () => {
+      const { repository } = makeSut();
+      jest
+        .spyOn(prismaMock.user, 'update')
+        .mockRejectedValueOnce(new Error() as never);
+
+      const promise = repository.deleteFavoritePokemons({
+        userId: 1,
+        pokemonsIds: [1, 2],
+      });
+
+      await expect(promise).rejects.toThrow();
+    });
+  });
 });

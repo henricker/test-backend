@@ -4,11 +4,25 @@ import { IPokemon } from '../../../../domain/entities/pokemon';
 import { IUser } from '../../../../domain/entities/user';
 import { createUserOptions } from '../../../../domain/usecases/user/create-user';
 import { AddPokemonFavoriteOptions } from '../../../../domain/usecases/user/pokemon/add-pokemon-favorite';
+import { DeleteFavoritePokemonsOptions } from '../../../../domain/usecases/user/pokemon/delete-favorite-pokemons';
 import { GetPokemonsFavoriteOptions } from '../../../../domain/usecases/user/pokemon/get-pokemons-favorite';
 import { PaginationData } from '../../../../domain/util/pagination-data';
 
 export class UserPrismaRepository implements IUserRepository {
   constructor(private readonly connection: PrismaClient) {}
+
+  async deleteFavoritePokemons(
+    options: DeleteFavoritePokemonsOptions
+  ): Promise<void> {
+    await this.connection.user.update({
+      where: { id: options.userId },
+      data: {
+        favoritesPokemons: {
+          disconnect: options.pokemonsIds.map((id) => ({ id })),
+        },
+      },
+    });
+  }
 
   async addPokemonsFavorite(options: AddPokemonFavoriteOptions): Promise<void> {
     await this.connection.user.update({

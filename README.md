@@ -28,6 +28,9 @@
     npm run test:integration # => apenas roda os testes de integração
     npm run test:ci # => roda os testes e mostra o coverage de código testado
    ```
+  
+ - Com apenas os unitários garantimos 100% de coverage!
+ ![](./docs/coverage_testing.png)
 
 ## Diagrama do banco de dados
 - Busquei arquitetar o banco de maneira a não ter tantos problemas com repetição dos dados
@@ -95,6 +98,15 @@
   - Caso o usuário não esteja autenticado não conseguirá acessar a rota
   - Retornará 201, sem nada, mas terá associado os pokemons com o usuário no banco de dados
  ```
+ - Rota /api/users/pokemons (DELETE)
+ ```
+ # Recebe no body da requisição os ids dos pokemons que ele vai remover dos favoritos exm: { pokemonsIds: [1, 2, 3] }
+  - Caso seja enviado dados inválidos terá retorno 400 com os erros
+  - Caso o usuário não esteja autenticado não conseguirá acessar a rota
+  - Retornará 204, sem nada, mas terá desassociado os pokemons com o usuário no banco de dados
+ ```
+
+ - Deixei um arquivo do insomnia para que você consiga realizar os testes
 
 ## Segurança
  - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto por IP
