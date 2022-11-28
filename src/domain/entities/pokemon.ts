@@ -1,6 +1,7 @@
 import { IPokemonCharacteristics } from './pokemon-characteristics';
 import { IPokemonEvolutionInfo } from './pokemon-evolution-info';
 import { IPokemonPowerStatus } from './power-status';
+import { IUser } from './user';
 
 export interface IPokemon {
   id: number;
@@ -12,4 +13,5 @@ export interface IPokemon {
   characteristics?: IPokemonCharacteristics;
   evolutionInfo?: IPokemonEvolutionInfo;
   powerStatus?: IPokemonPowerStatus;
+  users?: IUser[];
 }

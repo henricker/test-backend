@@ -1,9 +1,11 @@
+import { IUser } from '../../domain/entities/user';
+
 export type HttpRequest = {
   body?: any;
   params?: any;
   query?: any;
   headers?: any;
-  user?: any;
+  user?: Omit<IUser, 'password'>;
 };
 
 export type HttpResponse = {

@@ -17,7 +17,7 @@ const makeSut = () => {
   };
 };
 
-describe('# Controller - get pokemons', () => {
+describe('# Controller - create user', () => {
   const request = {
     body: createUserMock,
   };

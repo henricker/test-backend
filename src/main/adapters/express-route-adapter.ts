@@ -7,6 +7,8 @@ export const expressAdapterRoute =
       body: req.body,
       query: req.query,
       params: req.params,
+      headers: req.headers,
+      user: req.user,
     };
 
     const httpResponse = await controller.handle(httpRequest);

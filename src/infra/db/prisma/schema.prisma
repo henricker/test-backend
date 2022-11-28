@@ -22,6 +22,7 @@ model Pokemon {
   name                     String
   type                     Type[]
   weather                  Weather[]
+  User                     User[]
 }
 
 model User {
@@ -29,6 +30,8 @@ model User {
   username String @unique
   email    String @unique
   password String
+
+  favoritesPokemons Pokemon[]
 }
 
 model Type {
