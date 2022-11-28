@@ -19,7 +19,7 @@
 
 ## Testes ?
  - Sim!, implementei testes unitários
- - Em breve, farei os de integração :)
+ - Acabei não colocando os de integração por conta que meu tempo estava muito corrido, mas pretendo adicionar :)
  - Por questões de contexto, rode os testes dentro do container :)
  - Criei alguns scripts para orientá-lo ao rodar os testes
    ```bash
@@ -28,6 +28,11 @@
     npm run test:integration # => apenas roda os testes de integração
     npm run test:ci # => roda os testes e mostra o coverage de código testado
    ```
+
+## Diagrama do banco de dados
+- Busquei arquitetar o banco de maneira a não ter tantos problemas com repetição dos dados
+  - Tentei normalizar as tabelas ao máximo
+  - ![diagrama-banco-de-dados](./src/infra/db/prisma/ERD.svg)
 
 ## Quais as funcionalidades ?
  - Endpoints públicos 
@@ -41,7 +46,7 @@
    - /api/user/pokemons (GET) => retorna a lista de pokemons favoritos do usuário
 
 ## Sobre as rotas
- - Rota /api/pokemons (get)
+- Rota /api/pokemons (get)
    ```
    # Recebe os seguintes filtros na query da requisição
       - page, limit => responsáveis na paginação => (Obrigatórios!)
@@ -52,13 +57,14 @@
       - familyId => pesquisa os pokemons pela família => (1, 2...)
       - wather => pesquisa pokemons pelo clima da região onde se encontram => ('Rainy', 'Sunny'...)
    ```
- - Rota /api/pokemons/id
+
+- Rota /api/pokemons/id
    ```
    # Recebe o parâmetro id
     - Caso seja enviado um id inválido retornará 400 com uma mensagem de id inválido
     - Semelhante ao /pokemons, mas retorna apenas um pokemon
    ```
- - Rota /api/users
+- Rota /api/users
 
    ```
    # Recebe no body: username, email, password
@@ -75,6 +81,20 @@
   - Realiza o login do usuário, checa a senha e cria um token jwt
   - retorna status 200, alguns dados básicos do usuário e o token jwt
   ```
+- Rota /api/users/pokemons (GET)
+ ```
+ # Recebe na query da requisição page, limit (obrigatórios) e name (opcional)
+  - Caso seja enviado dados inválidos terá retorno 400 com os erros
+  - Caso o usuário não esteja autenticado não conseguirá acessar a rota
+  - Retorna status 200 e de forma paginada os pokemons favoritos do usuário
+ ```
+- Rota /api/users/pokemons (POST)
+ ```
+ # Recebe no body da requisição os ids dos pokemons que ele vai favoritar exm: { pokemonsIds: [1, 2, 3] }
+  - Caso seja enviado dados inválidos terá retorno 400 com os erros
+  - Caso o usuário não esteja autenticado não conseguirá acessar a rota
+  - Retornará 201, sem nada, mas terá associado os pokemons com o usuário no banco de dados
+ ```
 
 ## Segurança
  - Para evitar ataques de DDO's blindei a API com um rate limit de 100 requisições por minuto por IP
