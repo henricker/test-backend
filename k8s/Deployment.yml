@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poke-api
+  labels:
+    app: poke-api
+spec:
+  selector:
+    matchLabels:
+      app: poke-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poke-api
+    spec:
+      containers:
+        - name: 'poke-api'
+          image: 'henricker/poke-api'
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 150m
+              memory: 300Mi
+          envFrom:
+            - configMapRef:
+                name: pokeapi-env
+
