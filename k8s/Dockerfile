@@ -3,10 +3,10 @@
 FROM node:16-alpine
 
 WORKDIR /usr/src/app
-COPY package*.json ./
+COPY ../package*.json ./
 RUN npm install
 
-COPY . .
+COPY .. .
 
 RUN npm run build
 RUN npm run migrate:run
