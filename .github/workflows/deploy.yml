@@ -32,7 +32,7 @@ jobs:
       - name: Build and push to registry
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./k8s
           file: ./k8s/Dockerfile
           push: true
           tags: henricker/pokemon-api:latest
