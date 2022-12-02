@@ -19,6 +19,8 @@ jobs:
           echo ${{ secrets.PORT }} >> .env &&
           echo ${{ secrets.API_START_ARG }} >> .env &&
           cat .env
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
