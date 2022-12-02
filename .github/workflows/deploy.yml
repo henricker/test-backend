@@ -18,7 +18,7 @@ jobs:
           echo ${{ secrets.DATABASE_URL }} >> .env &&
           echo ${{ secrets.JWT_SECRET_KEY }} >> .env &&
           echo ${{ secrets.PORT }} >> .env &&
-          echo ${{ secrets.API_START_ARG }} >> .env
+          echo ${{ secrets.API_START_ARG }} >> .env && ls -la
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up QEMU
