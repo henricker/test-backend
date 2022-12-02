@@ -7,6 +7,7 @@ COPY ../package*.json ./
 RUN npm install
 COPY .. .
 RUN npm run build
+RUN ls -la
 RUN npm run migrate:run
 RUN npm run seed
 
