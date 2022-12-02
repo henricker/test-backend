@@ -13,7 +13,7 @@ jobs:
       - name: Create env file
         run: echo ${{ secrets.Production }} > .env
       - name: Show envs
-        run: cat .env
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }}
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
       # - name: Set up Docker Buildx
