@@ -20,7 +20,7 @@ jobs:
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env &&
           echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> .env &&
           echo "PORT=${{ secrets.PORT }}" >> .env &&
-          echo "API_START_ARG=${{ secrets.API_START_ARG }}"" >> .env
+          echo "API_START_ARG=${{ secrets.API_START_ARG }}" >> .env
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
