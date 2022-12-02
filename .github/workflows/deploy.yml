@@ -10,6 +10,8 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Create env file
         # Thats is workarround for github actions :(
         run: |
@@ -18,9 +20,7 @@ jobs:
           echo ${{ secrets.DATABASE_URL }} >> .env &&
           echo ${{ secrets.JWT_SECRET_KEY }} >> .env &&
           echo ${{ secrets.PORT }} >> .env &&
-          echo ${{ secrets.API_START_ARG }} >> .env && ls -la
-      - name: Checkout
-        uses: actions/checkout@v3
+          echo ${{ secrets.API_START_ARG }} >> .env
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
