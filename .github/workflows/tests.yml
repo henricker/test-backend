@@ -1,0 +1,26 @@
+name: NodeJs Tests
+
+on: 
+  pull_request:
+    branches: [ 'main' ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Use Node.J ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Building app
+        run: npm run build
+      - name: Running tests
+        run: npm run test:ci
