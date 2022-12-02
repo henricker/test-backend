@@ -9,7 +9,6 @@ COPY .. .
 RUN npm run build
 RUN npm run migrate:run
 RUN npx prisma generate
-RUN npm run seed
 
 USER node
 
