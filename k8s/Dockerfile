@@ -7,8 +7,8 @@ COPY ../package*.json ./
 RUN npm install
 COPY .. .
 RUN npm run build
-RUN cat .env
 RUN npm run migrate:run
+RUN npx prisma generate
 RUN npm run seed
 
 USER node
