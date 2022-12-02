@@ -9,6 +9,10 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+    env:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
     steps:
       - name: Create env file
         run: echo ${{ secrets.Production }} > .env
@@ -17,12 +21,11 @@ jobs:
           if [ "$DOCKERHUB_USERNAME" === 'henricker']
           then
             echo "It's me"
+            echo "It's $DOCKERHUB_USERNAME"
           else
             echo "It's not me"
+            echo "It's $DOCKERHUB_USERNAME"
           fi
-    env:
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
       # - name: Set up Docker Buildx
