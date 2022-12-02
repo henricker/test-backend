@@ -18,7 +18,7 @@ jobs:
         run: echo ${{ secrets.Production }} > .env
       - name: Show envs
         run: |
-          if [ "$DOCKERHUB_USERNAME" == 'henricker']
+          if [ "$DOCKERHUB_USERNAME" == 'henricker'] 
           then
             echo "It's me"
             echo "It's $DOCKERHUB_USERNAME"
