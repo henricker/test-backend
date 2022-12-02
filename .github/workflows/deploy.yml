@@ -15,17 +15,16 @@ jobs:
 
     steps:
       - name: Create env file
-        run: echo ${{ secrets.Production }} > .env
-      - name: Show envs
         run: |
-          if [ "$DOCKERHUB_USERNAME" == 'henricker'] 
-          then
-            echo "It's me"
-            echo "It's $DOCKERHUB_USERNAME"
-          else
-            echo "It's not me"
-            echo "It's $DOCKERHUB_USERNAME"
-          fi
+          echo ${{ secrets.DOCKERHUB_USERNAME }} >> .env &&
+          echo ${{ secrets.DOCKERHUB_TOKEN }} >> .env &&
+          echo ${{ secrets.DATABASE_URL }} >> .env &&
+          echo ${{ secrets.JWT_SECRET_KEY }} >> .env &&
+          echo ${{ secrets.PORT }} >> .env &&
+          echo ${{ secrets.API_START_ARG }} >> .env &&
+          cat .env
+
+
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
       # - name: Set up Docker Buildx
